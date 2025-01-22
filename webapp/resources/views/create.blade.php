@@ -1,18 +1,13 @@
-<!-- 課題5 -->
-<!-- {{ $title }} -->
-
-<h1>編集画面</h1>
-<form action="{{ route('regist.edit', ['id' => $post->id]) }}" method="post">
+<h1>新規投稿作成</h1>
+<form action="{{ route('store.post') }}" method="post">
     @csrf
     <div>
         タイトル
-        <input type="text" name="title" value="{{ $post->title }}">
+        <input type="text" name="title">
     </div>
-
-
     <div>
         投稿者
-        <select name="author_id" id="">
+        <select name="author_id">
             <option value="">選択してください</option>
             @foreach ($authors as $author)
                 <option value="{{ $author->id }}">{{ $author->author_name }}</option>
@@ -21,7 +16,7 @@
     </div>
     <div>
         本文
-        <textarea name="content" id="" cols="30" rows="10">{{ $post->content }}</textarea>
+        <textarea name="content" cols="30" rows="10"></textarea>
     </div>
-    <input type="submit">
+    <input type="submit" value="投稿">
 </form>
