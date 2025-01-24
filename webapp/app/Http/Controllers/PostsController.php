@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Author;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Log;
 
 use DB;
-use Log;
 
 class PostsController extends Controller
 {
@@ -110,6 +110,17 @@ class PostsController extends Controller
                 ->with('error', '投稿に失敗しました');
         }
     }
+
+    //編集画面表示の際にpost情報をログに出力
+    public function edit($id)
+{
+    $post = Post::findOrFail($id);
+    
+    // $postの情報をログに出力
+    Log::info('Editing post:', ['post' => $post]);
+
+    return view('posts.edit', compact('post'));
+}
 }
 
     // // 課題3
