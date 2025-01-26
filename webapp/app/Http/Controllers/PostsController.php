@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
-    //
     // 課題3
     public function index() {
         return view('index');
