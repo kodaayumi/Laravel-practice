@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 //各URLにリクエストが来た場合にメソッドが実行される
-Route::get('/index', [App\Http\Controllers\PostsController::class, 'index'])->name('index');
+Route::get('index', [App\Http\Controllers\PostsController::class, 'index'])->name('index');
 Route::get('create', [App\Http\Controllers\PostsController::class, 'showCreate'])->name('show.create');
 Route::post('create', [App\Http\Controllers\PostsController::class, 'storePost'])->name('store.post');
 Route::get('edit/{id}', [App\Http\Controllers\PostsController::class, 'showEdit'])->name('show.edit');
