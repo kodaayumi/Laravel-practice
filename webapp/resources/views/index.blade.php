@@ -1,6 +1,3 @@
-<!-- 課題2 -->
-<!-- Hello world! -->
-
 <h1>一覧画面</h1>
 <button onclick="location.href='{{ route('show.create') }}'">新規登録画面へ</button>
 <table>
