@@ -52,6 +52,8 @@ class PostsController extends Controller
             ->route('index')
             ->with('error', '404 投稿が存在しません');
         }
+        Log::info('Editing post:', ['post' => $post]);
+        
         $authors = Author::all();
         return view ('edit', [
             'post' => $post,
@@ -122,14 +124,3 @@ class PostsController extends Controller
     return view('posts.edit', compact('post'));
 }
 }
-
-    // // 課題3
-    // public function index() {
-    //     return view('index');
-    // }
-
-    // // 課題6
-    // public function show() {
-    //     $title = "詳細画面";
-    //     return view('show', ['title' => $title]);
-    // }
