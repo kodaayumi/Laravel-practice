@@ -12,7 +12,6 @@ class Post extends Model
 
     //マスアサインメントの制御(セキュリティ面/攻撃者が予期しないデータを操作するリスクの軽減)
     protected $fillable = [
-        'id',
         'title',
         'author_id',
         'content',
