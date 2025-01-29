@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [PostsController::class, 'index'])->name('index');
+Route::get('/index', [PostsController::class, 'index'])->name('index');
 
 Route::middleware(['auth'])->group(function () {
     // 投稿関連のルート
@@ -31,12 +31,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/store', [PostsController::class, 'store'])->name('store.post');
     Route::get('/edit/{id}', [PostsController::class, 'showEdit'])->name('show.edit');
     Route::post('/edit/{id}', [PostsController::class, 'registEdit'])->name('regist.edit');
-    Route::post('/delete/{id}', [PostsController::class, 'delete'])->name('delete');
+    Route::delete('/delete/{id}', [PostsController::class, 'deletePost'])->name('delete.post');
     
     // プロフィール関連のルート
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'delete'])->name('profile.destroy');
 });
 
 
