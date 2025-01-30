@@ -8,6 +8,7 @@ services:
       dockerfile: ./docker/apache/Dockerfile
     ports:
       - 80:80
+      - 5173:5173 # Vite用ポート
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
     volumes:
@@ -24,6 +25,7 @@ services:
       dockerfile: ./docker/db/Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: mydb
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: "Asia/Tokyo"
@@ -31,5 +33,7 @@ services:
       - net1
     ports:
       - 3306:3306
+    volumes:
+      - ./docker/db/initdb.d:/docker-entrypoint-initdb.d
 networks:
   net1:

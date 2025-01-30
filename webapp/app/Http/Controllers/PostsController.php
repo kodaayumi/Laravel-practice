@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Author;
+use App\Http\Requests\PostRequest;
 
 use DB;
 use Log;
@@ -40,6 +41,7 @@ class PostsController extends Controller
             ->with('error', '投稿に失敗しました');
         }
         return redirect()->route('index');
+
     }
 
     //投稿内容を編集するための画面を表示させる(投稿idが存在しない場合はエラーメッセージを表示)
@@ -92,6 +94,24 @@ class PostsController extends Controller
         return redirect()->route('index');
     }
 
+    public function store(PostRequest $request){
+        $model = new Post();
+        try {
+            DB::beginTransaction();
+            // バリデーション済みのデータを取得
+            $validated = $request->validated();
+            $model->storePost($request);  // $requestをそのまま渡す
+            DB::commit();
+            return redirect('/')->with('success', '投稿が完了しました');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollBack();
+            return redirect('/')
+                ->with('error', '投稿に失敗しました');
+        }
+    }
+}
+
     // // 課題3
     // public function index() {
     //     return view('index');
@@ -102,4 +122,3 @@ class PostsController extends Controller
     //     $title = "詳細画面";
     //     return view('show', ['title' => $title]);
     // }
-}

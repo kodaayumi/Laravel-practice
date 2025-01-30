@@ -1,7 +1,7 @@
 <!-- 課題5 -->
 <!-- {{ $title }} -->
 
-<h1>編集画面</h1>
+<!-- <h1>編集画面</h1>
 <form action="{{ route('regist.edit', ['id' => $post->id]) }}" method="post">
     @csrf
     <div>
@@ -24,4 +24,4 @@
         <textarea name="content" id="" cols="30" rows="10">{{ $post->content }}</textarea>
     </div>
     <input type="submit">
-</form>
+</form> -->
