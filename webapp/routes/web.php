@@ -25,19 +25,13 @@ Route::get('/dashboard', function () {
 
 Route::get('/index', [PostsController::class, 'index'])->name('index');
 
-Route::middleware(['auth'])->group(function () {
-    // 投稿関連のルート
-    Route::get('/create', [PostsController::class, 'showCreate'])->name('show.create');
-    Route::post('/store', [PostsController::class, 'store'])->name('store.post');
-    Route::get('/edit/{id}', [PostsController::class, 'showEdit'])->name('show.edit');
-    Route::post('/edit/{id}', [PostsController::class, 'registEdit'])->name('regist.edit');
-    Route::delete('/delete/{id}', [PostsController::class, 'deletePost'])->name('delete.post');
-    
-    // プロフィール関連のルート
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'delete'])->name('profile.destroy');
-});
 
+//各URLにリクエストが来た場合にメソッドが実行される
+Route::get('/index', [App\Http\Controllers\PostsController::class, 'index'])->name('index');
+Route::get('create', [App\Http\Controllers\PostsController::class, 'showCreate'])->name('show.create');
+Route::post('create', [App\Http\Controllers\PostsController::class, 'storePost'])->name('store.post');
+Route::get('edit/{id}', [App\Http\Controllers\PostsController::class, 'showEdit'])->name('show.edit');
+Route::post('edit/{id}', [App\Http\Controllers\PostsController::class, 'registEdit'])->name('regist.edit');
+Route::delete('delete/{id}', [App\Http\Controllers\PostsController::class, 'deletePost'])->name('delete');
 
-require __DIR__.'/auth.php';
+Route::get('/posts', [PostsController::class, 'index']);

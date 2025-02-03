@@ -1,6 +1,3 @@
-<!-- 課題2 -->
-<!-- Hello world! -->
-
 <h1>一覧画面</h1>
 <button onclick="location.href='{{ route('show.create') }}'">新規登録画面へ</button>
 <table>
@@ -19,7 +16,7 @@
                 <td>{{ $post->author_name }}</td>
                 <td><button onclick="location.href='{{ route('show.edit', ['id' => $post->id]) }}'">編集</button></td>
                 <td>
-                    <form action="{{ route('delete.post', ['id' => $post->id]) }}" method="post">
+                    <form action="{{ route('delete', ['id' => $post->id]) }}" method="post">
                         @csrf
                         @method('delete')
                         <button type="submit">削除</button>
