@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Author;
 use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Log;
 
 use DB;
-use Log;
 
 class PostsController extends Controller
 {
@@ -52,6 +52,8 @@ class PostsController extends Controller
             ->route('index')
             ->with('error', '404 投稿が存在しません');
         }
+        Log::info('Editing post:', ['post' => $post]);
+        
         $authors = Author::all();
         return view ('edit', [
             'post' => $post,
@@ -110,15 +112,15 @@ class PostsController extends Controller
                 ->with('error', '投稿に失敗しました');
         }
     }
+
+    //編集画面表示の際にpost情報をログに出力
+    public function edit($id)
+{
+    $post = Post::findOrFail($id);
+    
+    // $postの情報をログに出力
+    Log::info('Editing post:', ['post' => $post]);
+
+    return view('posts.edit', compact('post'));
 }
-
-    // // 課題3
-    // public function index() {
-    //     return view('index');
-    // }
-
-    // // 課題6
-    // public function show() {
-    //     $title = "詳細画面";
-    //     return view('show', ['title' => $title]);
-    // }
+}
